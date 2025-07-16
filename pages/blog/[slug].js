@@ -1,17 +1,27 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const BlogPost = ({ post }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
+    <div className="container mx-auto px-4 py-16">
       <Head>
-        <title>{post.title}</title>
-        <meta name="description" content={post.content.substring(0, 150)} />
+        <title>{post.title} - Mycelial Funguy</title>
+        <meta name="description" content={post.excerpt} />
       </Head>
 
-      <article>
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
-      </article>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-5xl font-black text-center mb-8">{post.title}</h1>
+        <div
+          className="prose lg:prose-xl max-w-none bg-white/30 backdrop-blur-sm p-8 rounded-lg shadow-lg"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+      </div>
     </div>
   );
 };
@@ -24,7 +34,7 @@ export async function getStaticPaths() {
     params: { slug: post.slug },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {

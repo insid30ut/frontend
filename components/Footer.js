@@ -1,6 +1,6 @@
 const Footer = () => (
-  <footer className="bg-gray-800 text-white p-4 mt-8">
-    <div className="container mx-auto text-center">
+  <footer className="bg-card text-card-foreground p-4 mt-8 border-t">
+    <div className="container mx-auto text-center text-sm text-muted-foreground">
       <p>&copy; 2025 Mycelial Funguy. All Rights Reserved.</p>
     </div>
   </footer>

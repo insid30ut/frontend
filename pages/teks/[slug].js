@@ -1,17 +1,27 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-const TekPage = ({ tek }) => {
+const TekPost = ({ tek }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
+    <div className="container mx-auto px-4 py-16">
       <Head>
-        <title>{tek.title}</title>
-        <meta name="description" content={tek.content.substring(0, 150)} />
+        <title>{tek.title} - Mycelial Funguy</title>
+        <meta name="description" content={tek.excerpt} />
       </Head>
 
-      <article>
-        <h1 className="text-4xl font-bold mb-4">{tek.title}</h1>
-        <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: tek.content }} />
-      </article>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-5xl font-black text-center mb-8">{tek.title}</h1>
+        <div
+          className="prose lg:prose-xl max-w-none bg-white/30 backdrop-blur-sm p-8 rounded-lg shadow-lg"
+          dangerouslySetInnerHTML={{ __html: tek.content }}
+        />
+      </div>
     </div>
   );
 };
@@ -24,7 +34,7 @@ export async function getStaticPaths() {
     params: { slug: tek.slug },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
@@ -39,4 +49,4 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default TekPage;
+export default TekPost;

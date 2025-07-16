@@ -1,34 +1,36 @@
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/teks', label: 'Teks & Tips' },
+  { href: '/about', label: 'About' },
+];
 
 const Navigation = () => {
-  const { user, logout } = useAuth();
+  const router = useRouter();
 
   return (
     <nav>
-      <ul className="flex items-center space-x-4">
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/about">About</Link></li>
-        {user && (
-          <>
-            <li>
+      <ul className="flex items-center space-x-2">
+        {navLinks.map(({ href, label }) => {
+          const isActive = router.pathname === href;
+          return (
+            <li key={href}>
               <Link
-                href="/admin"
-                className="px-3 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600"
+                href={href}
+                className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white shadow-lg'
+                    : 'bg-white/30 text-gray-800 hover:bg-white/50 backdrop-blur-sm'
+                }`}
               >
-                Dashboard
+                {label}
               </Link>
             </li>
-            <li>
-              <button
-                onClick={logout}
-                className="px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-              >
-                Logout
-              </button>
-            </li>
-          </>
-        )}
+          );
+        })}
       </ul>
     </nav>
   );
