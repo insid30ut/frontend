@@ -1,0 +1,10 @@
+.container {
+  padding: 2rem;
+}
+
+.managementSection {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
