@@ -19,9 +19,9 @@ const Home = ({ posts, teks }) => (
       <ul>
         {posts.map((post) => (
           <li key={post._id}>
-            <Link href={`/blog/${post.slug}`}>
-              <a className="text-xl font-bold">{post.title}</a>
-            </Link>
+          <Link href={`/blog/${post.slug}`} className="text-xl font-bold">
+          {post.title}
+          </Link>
           </li>
         ))}
       </ul>
@@ -32,9 +32,9 @@ const Home = ({ posts, teks }) => (
       <ul>
         {teks.map((tek) => (
           <li key={tek._id}>
-            <Link href={`/teks/${tek.slug}`}>
-              <a className="text-xl font-bold">{tek.title}</a>
-            </Link>
+        <Link href={`/teks/${tek.slug}`} className="text-xl font-bold">
+          {tek.title}
+        </Link>
           </li>
         ))}
       </ul>
