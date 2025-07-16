@@ -3,21 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-color: #1a202c;
-  color: #cbd5e0;
+  @apply bg-gray-900 text-gray-300;
   font-family: 'Georgia', serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #f7fafc;
+  @apply text-gray-100;
   font-family: 'Helvetica Neue', sans-serif;
 }
 
 a {
-  color: #63b3ed;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  @apply text-blue-400 hover:underline;
 }
